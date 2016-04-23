@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010-2014 Rene Nitzsche (rene@system25.de)
+*  (c) 2007-2010 Rene Nitzsche (rene@system25.de)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,10 +23,11 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('rn_base') . 'class.tx_rnbase.php');
+// require_ once(PATH_ t3lib.'class.t3lib_svbase.php');
 
 
 /**
- * 
+ *
  * @author Rene Nitzsche
  */
 class tx_t3sportstats_srv_PlayerStats extends t3lib_svbase {
@@ -47,7 +48,7 @@ class tx_t3sportstats_srv_PlayerStats extends t3lib_svbase {
 		$this->indexWinLoose($dataBag, $match, $isHome);
 	}
 	/**
-	 * 
+	 *
 	 * @param tx_t3sportstats_util_DataBag $dataBag
 	 * @param tx_cfcleague_models_Match $match
 	 * @param boolean $isHome

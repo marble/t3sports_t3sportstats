@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010-2014 Rene Nitzsche (rene@system25.de)
+*  (c) 2010 Rene Nitzsche (rene@system25.de)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,18 +23,19 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('rn_base') . 'class.tx_rnbase.php');
+// require_ once(PATH_ t3lib.'class.t3lib_svbase.php');
 
 
 /**
  * Die Schiedsrichterstatistiken werden immer aus Vereinssicht erstellt. Dadurch müssen für jedes
- * Spiel auch zwei Datensätze angelegt werden, einer für jeden Verein. 
+ * Spiel auch zwei Datensätze angelegt werden, einer für jeden Verein.
  * @author Rene Nitzsche
  */
 class tx_t3sportstats_srv_RefereeStats extends t3lib_svbase {
 	private $types = array();
 
 	/**
-	 * Update statistics for a referee
+	 * Update statistics for a coach
 	 *
 	 * @param tx_t3sportstats_util_DataBag $dataBag
 	 * @param tx_cfcleague_models_Match $match
@@ -53,7 +54,7 @@ class tx_t3sportstats_srv_RefereeStats extends t3lib_svbase {
 //		$this->indexGoals($dataBag, $match, $isHome);
 	}
 	/**
-	 * 
+	 *
 	 * @param tx_t3sportstats_util_DataBag $dataBag
 	 * @param tx_cfcleague_models_Match $match
 	 * @param boolean $isHome
@@ -67,7 +68,7 @@ class tx_t3sportstats_srv_RefereeStats extends t3lib_svbase {
 		$this->indexOwnAgainst('cardred', $dataBag, $match, $isHome, $mnProv);
 	}
 	/**
-	 * 
+	 *
 	 * @param tx_t3sportstats_util_DataBag $dataBag
 	 * @param tx_cfcleague_models_Match $match
 	 * @param boolean $isHome
@@ -80,7 +81,7 @@ class tx_t3sportstats_srv_RefereeStats extends t3lib_svbase {
 		$noteTypes = $statTypes[$baseType]['types'];
 		foreach($notes As $note) {
 			if($this->isType($note->getType(), $noteTypes)) {
-				if($note->isHome()) 
+				if($note->isHome())
 					$key = $isHome ? 'own' : 'against';
 				else
 					$key = $isHome ? 'against' : 'own';
@@ -89,7 +90,7 @@ class tx_t3sportstats_srv_RefereeStats extends t3lib_svbase {
 		}
 	}
 	/**
-	 * 
+	 *
 	 * @param tx_t3sportstats_util_DataBag $dataBag
 	 * @param tx_cfcleague_models_Match $match
 	 * @param boolean $isHome
@@ -105,7 +106,7 @@ class tx_t3sportstats_srv_RefereeStats extends t3lib_svbase {
 		$dataBag->addType($type, 1);
 	}
 	/**
-	 * 
+	 *
 	 * @param tx_t3sportstats_util_DataBag $dataBag
 	 */
 	private function isAssist($dataBag) {

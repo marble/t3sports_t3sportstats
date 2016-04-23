@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010-2014 Rene Nitzsche (rene@system25.de)
+*  (c) 2007-2010 Rene Nitzsche (rene@system25.de)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,6 +23,7 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('rn_base') . 'class.tx_rnbase.php');
+//require_ once(PATH_ t3lib.'class.t3lib_svbase.php');
 tx_rnbase::load('tx_rnbase_util_Logger');
 tx_rnbase::load('tx_rnbase_util_Dates');
 tx_rnbase::load('tx_t3sportstats_util_MatchNoteProvider');
@@ -31,7 +32,7 @@ tx_rnbase::load('tx_t3sportstats_util_MatchNoteProvider');
 
 /**
  * Service for accessing team information
- * 
+ *
  * @author Rene Nitzsche
  */
 class tx_t3sportstats_srv_Statistics extends t3lib_svbase {
@@ -62,7 +63,7 @@ class tx_t3sportstats_srv_Statistics extends t3lib_svbase {
 		tx_rnbase_util_Logger::info('Start player statistics run for ' . count($matches) . ' matches.', 't3sportstats');
 		$time = microtime(true);
 		$memStart = memory_get_usage();
-		
+
 		// Über alle Spiele iterieren und die Spieler an die Services geben
 		for($j=0, $mc = count($matches); $j < $mc; $j++){
 			$matchNotes = tx_cfcleague_util_ServiceRegistry::getMatchService()->retrieveMatchNotes($matches[$j], true);
@@ -100,7 +101,7 @@ class tx_t3sportstats_srv_Statistics extends t3lib_svbase {
 
 		$del = $this->clearPlayerData($match, $homeTeam);
 		tx_rnbase_util_Logger::debug('Player statistics: ' . $del . ' old records deleted.', 't3sportstats');
-		
+
 		$dataBags = $this->getPlayerBags($match, $homeTeam);
 		for($i=0, $servicesArrCnt=count($servicesArr); $i < $servicesArrCnt; $i++) {
 			$service =& $servicesArr[$i];
@@ -265,7 +266,7 @@ class tx_t3sportstats_srv_Statistics extends t3lib_svbase {
 			if(strlen($ids) > 0) $ids .= ',' . $match->record['assists'];
 			else $ids = $match->record['assists'];
 		}
-		
+
 		$bags = array();
 		$refIds = t3lib_div::intExplode(',', $ids);
 		foreach($refIds As $uid) {

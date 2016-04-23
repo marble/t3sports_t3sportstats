@@ -48,7 +48,7 @@ class tx_t3sportstats_tests_srvPlayerStats_testcase extends tx_phpunit_testcase 
 		$mnProv = tx_t3sportstats_util_MatchNoteProvider::createInstance($notes);
 		$this->getService()->indexPlayerStats($bagHash[100], $match, $mnProv, true);
 
-		//		t3lib_div::debug($bagHash[100], 'class.tx_t3sportstats_tests_srvPlayerStats_testcase.php'); // TODO: remove me
+		//		t3lib_utility_Debug::debug($bagHash[100], 'class.tx_t3sportstats_tests_srvPlayerStats_testcase.php'); // TODO: remove me
 		$this->assertEquals(2, $bagHash[100]->getTypeValue('goals'), 'Goals count is wrong');
 		$this->assertEquals(1, $bagHash[100]->getTypeValue('goalshead'), 'Goals header count is wrong');
 		$this->assertEquals(1, $bagHash[100]->getTypeValue('win'), 'Win count is wrong');

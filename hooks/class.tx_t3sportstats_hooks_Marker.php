@@ -42,7 +42,7 @@ class tx_t3sportstats_hooks_Marker {
 	 * @param tx_cfcleaguefe_util_ProfileMarker $parent
 	 */
 	public function parseProfile($params, $parent) {
-//t3lib_div::debug($params, 'class.tx_t3sportstats_hooks_Marker.php'); // TODO: remove me
+//t3lib_utility_Debug::debug($params, 'class.tx_t3sportstats_hooks_Marker.php'); // TODO: remove me
 		// Wir benötigen mehrere Statistiken pro Person
 		// Diese müssen per TS konfiguriert werden
 		// stats.liga.fields..

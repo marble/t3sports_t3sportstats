@@ -6,8 +6,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="plugin.t3sportstats.label">T3sports: Statistics</label>
-			<label index="plugin.t3sportstats.description">Shows extensive statistics of players, trainers and referees</label>
+			<label index="plugin.t3sportstats.label">t3sportstats</label>
 			<label index="plugin.t3sportstats.flexform.tab.common">Common</label>
 			<label index="plugin.t3sportstats.flexform.tab.TSSetup">TS-Setup</label>
 			<label index="plugin.t3sportstats.flexform.tssetup">plugin.tx_t3sportstats.</label>
@@ -29,8 +28,6 @@
 
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="plugin.t3sportstats.label">T3sports: Statistiken</label>
-			<label index="plugin.t3sportstats.description">Zeigt umfangreiche Statistiken von Spielern, Trainern and Schiedsrichtern</label>
 			<label index="plugin.t3sportstats.flexform.reporttype">Auswertung</label>
 			<label index="plugin.t3sportstats.flexform.highlightteam">Team Spieler hervorheben</label>
 

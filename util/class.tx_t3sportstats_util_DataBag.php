@@ -55,7 +55,7 @@ class tx_t3sportstats_util_DataBag {
 			$out .= $key. ' = ' . $val . "\n";
 		}
 		reset($this->data);
-		return $out; //t3lib_div::view_array($this->record);
+		return $out; //t3lib_utility_Debug::viewArray($this->record);
 	}
 }
 

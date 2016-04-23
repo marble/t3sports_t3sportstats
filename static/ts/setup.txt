@@ -16,7 +16,6 @@ tt_content.list.20.tx_t3sportstats    =< plugin.tx_t3sportstats
 lib.t3sports.statsData {
   pagebrowser =< lib.t3sports.pagebrowser
   roll.value = 1
-  totalline.startValue = 1
 
   player =< lib.t3sports.profile
   coach =< lib.t3sports.profile

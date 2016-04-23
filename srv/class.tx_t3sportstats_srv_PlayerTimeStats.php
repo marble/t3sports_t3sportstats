@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010-2014 Rene Nitzsche (rene@system25.de)
+*  (c) 2007-2010 Rene Nitzsche (rene@system25.de)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,11 +23,12 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('rn_base') . 'class.tx_rnbase.php');
+// require_ once(PATH_ t3lib.'class.t3lib_svbase.php');
 
 tx_rnbase::load('tx_cfcleague_util_MatchNote');
 
 /**
- * 
+ *
  * @author Rene Nitzsche
  */
 class tx_t3sportstats_srv_PlayerTimeStats extends t3lib_svbase {
@@ -57,29 +58,21 @@ class tx_t3sportstats_srv_PlayerTimeStats extends t3lib_svbase {
 				$isEndPlayer = true;
 				$dataBag->setType('played', 1);
 			}
-			elseif(tx_cfcleague_util_MatchNote::isChangeOut($note) || 
+			elseif(tx_cfcleague_util_MatchNote::isChangeOut($note) ||
 				tx_cfcleague_util_MatchNote::isCardYellowRed($note) ||
 				tx_cfcleague_util_MatchNote::isCardRed($note) ) {
 				$time = $note->getMinute() - $startMin + $time;
 				$isEndPlayer = false;
-			}
+				}
 		}
 		if($isEndPlayer) {
-			$endTime = $this->retrieveEndTime($match);
-			$time = $endTime - $startMin + $time;
+			$time = 90 - $startMin + $time;
 			$time = $time ? $time : 1; // Give the player at least 1 minute.
 		}
 		$dataBag->addType('playtime', $time);
 	}
-	protected function retrieveEndTime(tx_cfcleague_models_Match $match) {
-		$sports = $match->getCompetition()->getSportsService();
-		$matchInfo = $sports->getMatchInfo();
-		$key = $match->isExtraTime() ? tx_cfcleague_sports_MatchInfo::MATCH_EXTRA_TIME : tx_cfcleague_sports_MatchInfo::MATCH_TIME;
-		$ret = $matchInfo->getInfo($key);
-		return $ret == NULL ? 90 : $ret;
-	}
 	/**
-	 * 
+	 *
 	 * @param tx_cfcleague_models_Match $match
 	 * @param boolean $isHome
 	 */

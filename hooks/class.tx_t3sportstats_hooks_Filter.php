@@ -38,18 +38,9 @@ class tx_t3sportstats_hooks_Filter {
 
 	public function handleMatchFilter($params, $parent) {
 		$configurations = $params['configurations'];
-		$confId = $params['confid'];
-
 		$parameters = $configurations->getParameters();
 		$statsType = $parameters->get('statstype');
-		if(!$statsType)  // Ist was per TS konfiguriert
-			$statsType = $configurations->get($confId.'filter.statsType');
 		if(!$statsType) return;
-
-		$statsKey = $parameters->get('statskey');
-		if(!$statsKey)  // Ist was per TS konfiguriert
-			$statsKey = $configurations->get($confId.'filter.statsKey');
-
 		$profileType = 'player';
 		$profile = $parameters->getInt($profileType);
 		if(!$profile) {
@@ -60,24 +51,20 @@ class tx_t3sportstats_hooks_Filter {
 			$profileType = 'referee';
 			$profile = $parameters->getInt($profileType);
 		}
-		if(!$profile) { // Ist was per TS konfiguriert
-			$profileType = $configurations->get($confId.'filter.profileType');
-			$profileParam = $configurations->get($confId.'filter.profileParam');
-			if($profileType && $profileParam)
-				$profile = $parameters->getInt($profileParam);
-		}
-		
+
 
 		if(!$profile) return;
 
 		
 		$fields =& $params['fields'];
+		$confId = $params['confid'];
 		$confId .= 'filter.stats.'.$statsType.'.';
 
 		$cols = $configurations->get($confId.'columns');
 		if(!$cols) return;
 		$cols = array_flip(t3lib_div::trimExplode(',', $cols));
 
+		$statsKey = $parameters->get('statskey');
 		if($statsKey && array_key_exists(strtolower($statsKey), $cols)) {
 			$fields[self::$tableData[$profileType]['tableAlias'].'.'.strtoupper($statsKey)][OP_GT_INT] = 0;
 		}

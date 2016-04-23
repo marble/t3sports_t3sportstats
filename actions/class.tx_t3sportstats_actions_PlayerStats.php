@@ -1,26 +1,26 @@
 <?php
 /***************************************************************
- *  Copyright notice
- *
- *  (c) 2010-2014 Rene Nitzsche (rene@system25.de)
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+*  Copyright notice
+*
+*  (c) 2010 Rene Nitzsche (rene@system25.de)
+*  All rights reserved
+*
+*  This script is part of the TYPO3 project. The TYPO3 project is
+*  free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  The GNU General Public License can be found at
+*  http://www.gnu.org/copyleft/gpl.html.
+*
+*  This script is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  This copyright notice MUST APPEAR in all copies of the script!
+***************************************************************/
 
 require_once(t3lib_extMgm::extPath('rn_base') . 'class.tx_rnbase.php');
 
@@ -30,12 +30,12 @@ tx_rnbase::load('tx_rnbase_filter_BaseFilter');
 
 /**
  * Controller für Suchformular für Dokumenten
- *
+ * 
  */
 class tx_t3sportstats_actions_PlayerStats extends tx_rnbase_action_BaseIOC {
 
 	/**
-	 *
+	 * 
 	 *
 	 * @param array_object $parameters
 	 * @param tx_rnbase_configurations $configurations
@@ -49,6 +49,7 @@ class tx_t3sportstats_actions_PlayerStats extends tx_rnbase_action_BaseIOC {
 			// Abbruch kein Typ angegeben
 			throw new Exception('No statistics type configured in: ' . $this->getConfId().'statisticTypes');
 		}
+		
 
 		$statsData = array();
 		foreach ($types as $type) {
@@ -60,7 +61,7 @@ class tx_t3sportstats_actions_PlayerStats extends tx_rnbase_action_BaseIOC {
 			tx_rnbase::load('tx_cfcleague_models_Team');
 			$team = tx_cfcleague_models_Team::getInstance($teamId);
 			if(is_object($team) && $team->isValid())
-			$viewData->offsetSet('team', $team);
+				$viewData->offsetSet('team', $team);
 		}
 		return null;
 	}
@@ -75,20 +76,16 @@ class tx_t3sportstats_actions_PlayerStats extends tx_rnbase_action_BaseIOC {
 		$filter->init($fields, $options);
 		$debug = $configurations->get($this->getConfId().'options.debug');
 		if($debug)
-		$options['debug'] = 1;
+			$options['debug'] = 1;
 
-		self::handlePageBrowser($configurations,
-		$confId.'data.pagebrowser', $viewData, $fields, $options, array(
+		self::handlePageBrowser($configurations, 
+			$confId.'data.pagebrowser', $viewData, $fields, $options, array(
 			'searchcallback'=> array($srv, 'searchPlayerStats'),
 			'pbid' => $type.'ps',
-		)
+			)
 		);
 
 		$items = $srv->searchPlayerStats($fields, $options);
-		tx_rnbase_util_Misc::callHook('t3sportstats','playerstats_finddata',
-				array('type' => $type, 'items' => &$items, 'confid'=>$confId,
-							'fields'=>$fields, 'options'=>$options,
-							'configurations'=>$configurations), $this);
 		return $items;
 	}
 	/**
@@ -99,7 +96,7 @@ class tx_t3sportstats_actions_PlayerStats extends tx_rnbase_action_BaseIOC {
 	 * @param array_object $viewdata
 	 * @param array $fields
 	 * @param array $options
-	 */
+   */
 	private static function handlePageBrowser(&$configurations, $confid, &$viewdata, &$fields, &$options, $cfg = array()) {
 		$confid .= '.';
 		if(is_array($configurations->get($confid))) {
@@ -120,13 +117,13 @@ class tx_t3sportstats_actions_PlayerStats extends tx_rnbase_action_BaseIOC {
 			// PageBrowser initialisieren
 			$pbId = $cfg['pbid'] ? $cfg['pbid'] : 'pb';
 			$pageBrowser = tx_rnbase::makeInstance('tx_rnbase_util_PageBrowser', $pbId);
-			$pageSize = intval($configurations->get($confid.'limit'));
+	  	$pageSize = intval($configurations->get($confid.'limit'));
 
-			$pageBrowser->setState($configurations->getParameters(), $listSize, $pageSize);
+	  	$pageBrowser->setState($configurations->getParameters(), $listSize, $pageSize);
 			$limit = $pageBrowser->getState();
 			$options = array_merge($options, $limit);
 			if($viewdata)
-			$viewdata->offsetSet('pagebrowser', $pageBrowser);
+				$viewdata->offsetSet('pagebrowser', $pageBrowser);
 		}
 	}
 

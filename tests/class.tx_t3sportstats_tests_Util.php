@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2008-2015 Rene Nitzsche (rene@system25.de)
+*  (c) 2008-2010 Rene Nitzsche (rene@system25.de)
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -52,10 +52,9 @@ class tx_t3sportstats_tests_Util {
 	}
 	private static function makeInstances($yamlData, $clazzName) {
 		// Sicherstellen, daß die Klasse geladen wurde
-		$ret = array();
 		tx_rnbase::load($clazzName);
 		foreach($yamlData As $key => $arr) {
-			if(isset($arr['record']) && is_array($arr['record']))
+			if(is_array($arr['record']))
 				$ret[$key] = new $clazzName($arr['record']);
 		}
 		return $ret;

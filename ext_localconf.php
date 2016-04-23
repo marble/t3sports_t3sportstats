@@ -6,7 +6,6 @@ tx_rnbase::load('tx_t3sportstats_util_ServiceRegistry');
 tx_rnbase::load('tx_rnbase_util_SearchBase');
 
 $GLOBALS ['TYPO3_CONF_VARS']['EXTCONF']['cfc_league']['clearStatistics_hook'][] = 'EXT:' . $_EXTKEY . '/hooks/class.tx_t3sportstats_hooks_ClearStats.php:&tx_t3sportstats_hooks_ClearStats->clearStats4Comp';
-$GLOBALS ['TYPO3_CONF_VARS']['EXTCONF']['cfc_league']['mergeProfiles_hook'][] = 'EXT:' . $_EXTKEY . '/hooks/class.tx_t3sportstats_hooks_MergeProfiles.php:&tx_t3sportstats_hooks_MergeProfiles->mergeProfile';
 
 // Hook for match search
 $GLOBALS ['TYPO3_CONF_VARS']['EXTCONF']['cfc_league_fe']['search_Match_getTableMapping_hook'][] = 'EXT:' . $_EXTKEY . '/hooks/class.tx_t3sportstats_hooks_Search.php:&tx_t3sportstats_hooks_Search->getTableMappingMatch';
